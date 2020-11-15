@@ -10,6 +10,8 @@
     "@types/node": "^12.19.4",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
+    "@vercel/node": "^1.8.5",
+    "firebase": "^8.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.0",

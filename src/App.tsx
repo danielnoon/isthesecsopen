@@ -5,7 +5,7 @@ function App() {
   const [open, ready] = useIsOpen();
 
   return (
-    <div className="main">
+    <div className="wrapper">
       <main>
         <h1>Is the Selleck C-Store Open?</h1>
         {
