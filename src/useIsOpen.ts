@@ -6,7 +6,7 @@ export function useIsOpen() {
 
   useEffect(() => {
     (async () => {
-      setIsOpen(true);
+      setIsOpen(false);
       setReady(true);
     })();
   }, []);
