@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { database } from './firebase';
+import { useEffect, useState } from "react";
+import { database } from "./firebase";
 
 interface Hours {
   daily: string;
@@ -11,7 +11,7 @@ class TimeRange {
   private end: number;
 
   constructor(range: string) {
-    [this.start, this.end] = range.split('-').map((t) => parseFloat(t));
+    [this.start, this.end] = range.split("-").map((t) => parseFloat(t));
   }
 
   includes(hours: number, minutes: number) {
@@ -27,15 +27,24 @@ export function useIsOpen() {
   useEffect(() => {
     (async () => {
       const hours = (await (
-        await database.ref('/hours').once('value')
+        await database.ref("/hours").once("value")
       ).val()) as Hours;
 
       const dt = new Date();
       const date = `${dt.getFullYear}-${dt.getMonth}-${dt.getDate}`;
 
-      const today = hours[date] ?? hours.daily;
+      console.log(dt.getDay().toString());
+      console.log(hours[dt.getDay().toString()]);
 
-      const ranges = today.split('/').map((r) => new TimeRange(r));
+      const today = hours[date] ?? hours[dt.getDay().toString()];
+
+      if (!today) {
+        setIsOpen(false);
+        setReady(true);
+        return;
+      }
+
+      const ranges = today.split("/").map((r) => new TimeRange(r));
 
       setIsOpen(
         ranges.some((range) => range.includes(dt.getHours(), dt.getMinutes()))
